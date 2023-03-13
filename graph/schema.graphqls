@@ -1,0 +1,87 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Author {
+  id: ID!
+  username: String!
+  email: String!
+  articles: [Article!]!
+}
+
+type Article {
+  id: ID!
+  name: String!
+  content: String!
+}
+
+input NewAuthor {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input NewArticle {
+  author_id: String!
+  name: String!
+  content: String!
+}
+
+input GetArticleByAuthorID {
+  id: ID!
+}
+
+input GetArticleByUsername {
+  username: String!
+}
+
+input GetArticleByID {
+  id: ID!
+}
+
+input GetArticleByName {
+  name: String!
+}
+
+input UpdateAuthor {
+  id: ID!
+  username: String
+  email: String
+}
+
+input UpdateArticle {
+  id: ID!
+  name: String
+  content: String
+}
+
+input UpdatePassword {
+  id: ID!
+  password: String!
+}
+
+input DeleteAuthor{
+  id: ID!
+}
+
+input DeleteArticle{
+  id: ID!
+}
+
+type Query{
+  authors: [Author!]!
+  articleByAuthorID(input: GetArticleByAuthorID!):Author!
+  articleByUsername(input: GetArticleByUsername!):[Author!]!
+  articleByName(input: GetArticleByName!):[Author!]!
+  articleByID(input: GetArticleByID!):Author!
+}
+
+type Mutation{
+  createAuthor(input: NewAuthor!):Author!
+  createArticle(input: NewArticle!):Article!
+  updateAuthor(input: UpdateAuthor!):Boolean!
+  updatePassword(input: UpdatePassword!):Boolean!
+  deleteAuthor(input: DeleteAuthor!):Boolean!
+  updateArticle(input: UpdateArticle!):Boolean!
+  deleteArticle(input: DeleteArticle!):Boolean!
+}

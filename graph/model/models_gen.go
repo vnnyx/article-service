@@ -8,6 +8,12 @@ type Article struct {
 	Content string `json:"content"`
 }
 
+type Auth struct {
+	ID          string `json:"id"`
+	Username    string `json:"username"`
+	AccessToken string `json:"access_token"`
+}
+
 type Author struct {
 	ID       string     `json:"id"`
 	Username string     `json:"username"`
@@ -37,6 +43,11 @@ type GetArticleByName struct {
 
 type GetArticleByUsername struct {
 	Username string `json:"username"`
+}
+
+type LoginRequest struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 type NewArticle struct {

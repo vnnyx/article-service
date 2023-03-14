@@ -15,6 +15,12 @@ type Article {
   content: String!
 }
 
+type Auth{
+  id: ID!
+  username: String!
+  access_token: String!
+}
+
 input NewAuthor {
   username: String!
   email: String!
@@ -68,12 +74,18 @@ input DeleteArticle{
   id: ID!
 }
 
+input LoginRequest{
+  username: String!
+  password: String!
+}
+
 type Query{
   authors: [Author!]!
   articleByAuthorID(input: GetArticleByAuthorID!):Author!
   articleByUsername(input: GetArticleByUsername!):[Author!]!
   articleByName(input: GetArticleByName!):[Author!]!
   articleByID(input: GetArticleByID!):Author!
+  login(input: LoginRequest!):Auth!
 }
 
 type Mutation{

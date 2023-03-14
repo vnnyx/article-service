@@ -70,6 +70,11 @@ func (r *queryResolver) ArticleByID(ctx context.Context, input model.GetArticleB
 	return r.ArticleUC.GetArticleByID(ctx, input.ID)
 }
 
+// Login is the resolver for the login field.
+func (r *queryResolver) Login(ctx context.Context, input model.LoginRequest) (*model.Auth, error) {
+	return r.AuthUC.Login(ctx, &input)
+}
+
 // Mutation returns MutationResolver implementation.
 func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 

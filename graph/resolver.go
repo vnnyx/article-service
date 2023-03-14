@@ -1,6 +1,9 @@
 package graph
 
-import "github.com/vnnyx/article-service/graph/usecase"
+import (
+	"github.com/vnnyx/article-service/graph/usecase"
+	"github.com/vnnyx/article-service/graph/usecase/auth"
+)
 
 // This file will not be regenerated automatically.
 //
@@ -9,4 +12,5 @@ import "github.com/vnnyx/article-service/graph/usecase"
 type Resolver struct {
 	AuthorUC  usecase.AuthorUC
 	ArticleUC usecase.ArticleUC
+	AuthUC    auth.AuthUC
 }

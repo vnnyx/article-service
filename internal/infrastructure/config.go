@@ -12,6 +12,7 @@ type Config struct {
 	MongoURI               string `mapstructure:"MONGO_URI"`
 	MongoDatabae           string `mapstructure:"MONGO_DATABASE"`
 	AppPort                string `mapstructure:"APP_PORT"`
+	GRPCHost               string `mapstructure:"GRPC_HOST"`
 }
 
 func NewConfig() *Config {

@@ -11,18 +11,23 @@ import (
 	"github.com/vnnyx/article-service/graph/repository"
 	"github.com/vnnyx/article-service/graph/routes"
 	"github.com/vnnyx/article-service/graph/usecase"
+	auth2 "github.com/vnnyx/article-service/graph/usecase/auth"
 	"github.com/vnnyx/article-service/internal/infrastructure"
+	"github.com/vnnyx/auth-service/pb/auth"
+	"google.golang.org/grpc"
 )
 
 // Injectors from injector.go:
 
-func InitializeRoute(e *echo.Echo) *routes.Route {
+func InitializeRoute(e *echo.Echo, a grpc.ClientConnInterface) (*routes.Route, error) {
 	config := infrastructure.NewConfig()
 	database := infrastructure.NewMongoDatabase(config)
 	authorRepository := repository.NewAuthorRepository(database)
 	authorUC := usecase.NewAuthorUC(authorRepository)
 	articleRepository := repository.NewArticleRepository(database)
 	articleUC := usecase.NewArticleUC(articleRepository)
-	route := routes.NewRoute(e, authorUC, articleUC)
-	return route
+	authServiceClient := auth.NewAuthServiceClient(a)
+	authUC := auth2.NewAuthUC(authorRepository, authServiceClient)
+	route := routes.NewRoute(e, authorUC, articleUC, authUC)
+	return route, nil
 }
